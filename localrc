@@ -1,0 +1,42 @@
+DEST=/opt/stack
+
+LOGFILE=$DEST/logs/stack.sh.log
+VERBOSE=True
+OFFLINE=True
+LOG_COLOR=False
+SCREEN_LOGDIR=$DEST/logs/screen
+
+ADMIN_PASSWORD=stack
+MYSQL_PASSWORD=stack
+RABBIT_PASSWORD=stack
+SERVICE_PASSWORD=stack
+SERVICE_TOKEN=tokentoken
+
+
+CINDER_BRANCH=stable/icehouse
+GLANCE_BRANCH=stable/icehouse
+HORIZON_BRANCH=stable/icehouse
+KEYSTONE_BRANCH=stable/icehouse
+NOVA_BRANCH=stable/icehouse
+NEUTRON_BRANCH=stable/icehouse
+HEAT_BRANCH=stable/icehouse
+CEILOMETER_BRANCH=stable/icehouse
+
+#HOST_IP=w.x.y.z
+
+disable_service n-net
+enable_service q-svc
+enable_service q-agt
+enable_service q-dhcp
+enable_service q-l3
+enable_service q-meta
+enable_service neutron
+
+ENABLED_SERVICES+=,heat,h-api,h-api-cfn,h-api-cw,h-eng
+HEAT_STANDALONE=True
+
+ENABLED_SERVICES+=,ceilometer-acompute,ceilometer-acentral,ceilometer-collector,ceilometer-api
+ENABLED_SERVICES+=,ceilometer-alarm-notify,ceilometer-alarm-eval
+
+SCHEDULER=nova.scheduler.chance.ChanceScheduler
+
